@@ -20,6 +20,57 @@ struct transaction {
 	char description[20];
 };
 
+int compare(char *str1, char *str2)
+{
+	int i = 0, j = 0, k, d1 = 0, d2 = 0, m1 = 0, m2 = 0, y1 = 0, y2 = 0;
+	while (str1[i] != '-' || str2[i] != '-')
+	{
+		d1 = (d1 * 10) + (str1[i] - '0');
+		d2 = (d2 * 10) + (str2[i] - '0');
+		i++;
+	}
+	j = i + 1;
+	while (str1[j] != '-' || str2[j] != '-')
+	{
+		m1 = (m1 * 10) + (str1[j] - '0');
+		m2 = (m2 * 10) + (str2[j] - '0');
+		j++;
+	}
+	k = j + 1;
+	while (str1[k] != '\0' && str2[k] != '\0')
+	{
+		y1 = (y1 * 10) + (str1[k] - '0');
+		y2 = (y2 * 10) + (str2[k] - '0');
+		k++;
+	}
+	if (y1 > y2)
+		return 1;
+	if (y1 == y2)
+	{
+		if (m1 > m2)
+			return 1;
+		if (d1 > d1)
+			return 1;
+	}
+	if (y1 < y2)
+		return 0;
+
+
+}
+
+
 int countGreaterNumbers(struct transaction *Arr, int len, char *date) {
-	return -1;
+  
+	int i = 0, x, c = 0;
+	if (len == 0)
+		return -1;
+	if (Arr == nullptr)
+		return -1;
+	for (i = 0; i<len; i++)
+	{
+		x = compare(Arr[i].date, date);
+		if (x == 1)
+			c++;
+	}
+	return c;
 }
